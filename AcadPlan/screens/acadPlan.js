@@ -100,42 +100,6 @@ export default function AcadPlan() {
       "desc": "College Math. Contents included: Differentiation, Integration, and Application of Both\nPrerequisites: Pass Placement Test\nProfessor: Dr. Hartsock"
     },  
   ];
-  const FirstReceivingItemList = [/*
-    {
-      "id": 13,
-      "name": "M",
-      "credits": "           CR:3",
-      "background_color": '#ffaaff',
-      "title": "None",
-      "desc": "Description: Okay, here we go. Focus. Speed. I am Speed One Winner. 42 Losers. I eat losers for breakfast\nPrerequisites: CS 181\nProfessor: Dr. Mcqueen"
-    },
-    {
-      "id": 14,
-      "name": "N",
-      "credits": "           CR:3",
-      "background_color": '#ffaaff',
-      "title": "None",
-      "desc": "Description: Okay, here we go. Focus. Speed. I am Speed One Winner. 42 Losers. I eat losers for breakfast\nPrerequisites: CS 181\nProfessor: Dr. Mcqueen"
-    },
-    {
-      "id": 15,
-      "name": "O",
-      "credits": "           CR:3",
-      "background_color": '#ffaaff',
-      "title": "None",
-      "desc": "Description: Okay, here we go. Focus. Speed. I am Speed One Winner. 42 Losers. I eat losers for breakfast\nPrerequisites: CS 181\nProfessor: Dr. Mcqueen"
-
-    },
-    {
-      "id": 16,
-      "name": "P",
-      "credits": "           CR:3",
-      "background_color": '#ffaaff',
-      "title": "None",
-      "desc": "Description: Okay, here we go. Focus. Speed. I am Speed One Winner. 42 Losers. I eat losers for breakfast\nPrerequisites: CS 181\nProfessor: Dr. Mcqueen"
-    },
-    {},*/
-  ];
 
   const FirstListsList = [
       {
@@ -143,7 +107,7 @@ export default function AcadPlan() {
           "semesters": [
             {
                 "semester": "Fall",
-                "courselist": [{},{},{},{},{},{},{},{}] //[{},{},{},{},{}]
+                "courselist": [{},{},{},{},{},{},{},{}]
             },
             {
                 "semester": "Spring",
@@ -192,14 +156,6 @@ export default function AcadPlan() {
       },
   ];
       
-/*
-  const fallReceivingItemList = [];
-  for (let i=0;i<4;i++){
-    fallReceivingItemList[
-  }
-  const [receivingItemList, setReceivedItemList] = React.useState(FirstReceivingItemList);
-  const [receivingItemList2, setReceivedItemList1] = React.useState(defaultReceivingItemList1);
-  */
   const [dragItemMiddleList, setDragItemListMiddle] = React.useState(draggableItemList);
 
   const [receiveItemList, setReceiveItemList] = React.useState(FirstListsList);
@@ -272,26 +228,19 @@ export default function AcadPlan() {
         key={index}
         onReceiveDragDrop={(event) => {
           let selected_item = dragItemMiddleList[event.dragged.payload];
-          console.log('onReceiveDragDrop::index', selected_item, index);
-          console.log('onReceiveDragDrop :: payload', event.dragged.payload);
           let newReceivingItemList = [...receiveItemList];
           let popped_item = newReceivingItemList[yearIndex]["semesters"][semIndex]["courselist"][index]; 
-          console.log('onReceiveDragDrop :: newReceivingItemList', newReceivingItemList);
-          console.log('on receive: ', newReceivingItemList[yearIndex]["semesters"][semIndex]);
           newReceivingItemList[yearIndex]["semesters"][semIndex]["courselist"][index] = selected_item;
           setReceiveItemList(newReceivingItemList);
 
           let newDragItemMiddleList = [...dragItemMiddleList];
-          console.log("RRR", popped_item['id']);
           if(popped_item['id'] == undefined){
-            console.log("enter ere?")
             for (let i=event.dragged.payload; i<newDragItemMiddleList.length-1; i++){
               newDragItemMiddleList[i] = newDragItemMiddleList[i+1];
             }
             newDragItemMiddleList.pop();
           } else{
             newDragItemMiddleList[event.dragged.payload] = popped_item;
-            console.log('onReceiveDragDrop :: newDragItemMiddleList 2', newDragItemMiddleList);
           }
           setDragItemListMiddle(newDragItemMiddleList);
         }}
