@@ -1,20 +1,38 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
+import * as React from 'react';
+import { View, Text, Button } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator }
+    from '@react-navigation/native-stack';
+import Draggable, {DraggableCore} from 'react-draggable';
 
-export default function App() {
+import * as All from 'styled-components'
+import { space } from 'styled-system'
+import propTypes from '@styled-system/prop-types'
+
+
+import Login from "./screens/login";
+import AcadPlan from "./screens/acadPlan";
+import Detail from "./screens/detail";
+import Prev from "./screens/prev";
+
+
+
+const Stack = createNativeStackNavigator();
+
+function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={Login} />
+        <Stack.Screen name="Previous Plans" component={Prev} />
+        <Stack.Screen name="Detail Form" component={Detail} />
+        <Stack.Screen name="Academic Plan" component={AcadPlan} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
+export default App;
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+
